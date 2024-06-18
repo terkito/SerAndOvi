@@ -10,6 +10,7 @@ from .openai_client import OpenAi
 from .gemini_client import Gemini
 from .mistral_client import MistralAi
 from .groq_client import Groq
+from .lm_studio_client import LMStudio
 
 from src.state import AgentState
 
@@ -59,7 +60,11 @@ class LLM:
                 ("Mixtral", "mixtral-8x7b-32768"),
                 ("GEMMA 7B", "gemma-7b-it"),
             ],
-            "OLLAMA": []
+            "OLLAMA": [],
+            "LM_STUDIO": [
+                ("LM Studio", "local-model"),    
+            ],
+            
         }
         if ollama.client:
             self.models["OLLAMA"] = [(model["name"], model["name"]) for model in ollama.models]
@@ -98,7 +103,8 @@ class LLM:
             "OPENAI": OpenAi(),
             "GOOGLE": Gemini(),
             "MISTRAL": MistralAi(),
-            "GROQ": Groq()
+            "GROQ": Groq(),
+            "LM_STUDIO": LMStudio()
         }
 
         try:
